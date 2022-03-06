@@ -6,12 +6,12 @@ For running this tool i used these import files:
 
 ### For scraping the site
 Scraping import files:
-    ○ requests: for requesting the url.
-    ○ bs4 (BeautifulSoup): Getting the site data.
+- requests: for requesting the url.
+- bs4 (BeautifulSoup): Getting the site data.
 ### Data
 For making the databese
-    ○ Pandas: Making databeses
-    ○ Regex: To delete and find words
+- Pandas: Making databeses
+- Regex: To delete and find words
 
 ## What you will get
-1) A dataframe with all the maximum observations in the terminal (highest bitcoin value above).
+A dataframe with all the maximum observations in the terminal (highest bitcoin value above).
