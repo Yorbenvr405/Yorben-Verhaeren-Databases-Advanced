@@ -22,4 +22,5 @@ A dataframe with all the 5 maximum observations in the terminal (highest bitcoin
 
 # Updates
 Bitcoin_Scraper 0.0: Printing 50 sorted hashes (highest bitcoin value above).
+
 Bitcoin_Scraper 0.1: Realtime printing (every minute) and printing top 5 hashes.
