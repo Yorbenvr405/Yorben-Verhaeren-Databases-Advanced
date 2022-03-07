@@ -5,6 +5,7 @@ import pandas as pd
 import regex as re
 import time
 
+# this is for scraping in realtime every 1 minute
 while True:
 
     # --- Scraping data ---
@@ -65,6 +66,7 @@ while True:
 
     # making the dataframe
     result_df = pd.DataFrame (hash_bit, columns = ['Hash', 'Time', 'Amount (BTC)', 'Amount (USD)'])
+    # setting the types of ech collumn
     result_df = result_df.astype({'Hash': str, 'Time': str, 'Amount (BTC)': float, 'Amount (USD)': str})
 
     # sorting the dataframe on Amount (BTC)
@@ -72,5 +74,8 @@ while True:
 
     # printing the dataframe
     print(result_df[0:5])
+
+    # add a enter for next scraping
+    print()
 
     time.sleep(60)
