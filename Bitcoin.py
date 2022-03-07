@@ -78,4 +78,5 @@ while True:
     # add a enter for next scraping
     print()
 
+    # wait 60 seconds for next scraping
     time.sleep(60)
