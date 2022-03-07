@@ -8,14 +8,14 @@ For running this tool i used these import files:
 
 ### For scraping the site
 Scraping import files:
-- requests: for requesting the url.
-- bs4 (BeautifulSoup): Getting the site data.
+- Requests: for requesting the url.
+- Bs4 (BeautifulSoup): Getting the site data.
 ### Data
 For making the databese
 - Pandas: Making databeses
 - Regex: To delete and find words
 ### Helping for scraping
-- time: realtime scraping
+- Time: realtime scraping
 
 ## What you will get
 A dataframe with all the 5 maximum observations in the terminal (highest bitcoin value above).
