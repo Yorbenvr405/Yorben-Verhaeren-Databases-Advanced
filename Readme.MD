@@ -1,5 +1,6 @@
 # What is this tool?
-This is what the tool does: it wil scrape every minute 50 hashes and it will sort all the observation (highest bitcoin value above).
+First you will tu fill in haw many munites you want that the tool will run.
+Than it wil scrape every minute 50 hashes and it will sort all the observation (highest bitcoin value above).
 In the terminal you can see the top 5 hashes that were made that time (More info in "What you will get").
 I used BeautifulSoup for scraping the site and pandas and regex to edit the data (More info in "Import files").
 
@@ -24,3 +25,5 @@ A dataframe with all the 5 maximum observations in the terminal (highest bitcoin
 Bitcoin_Scraper 0.0: Printing 50 sorted hashes (highest bitcoin value above).
 
 Bitcoin_Scraper 0.1: Realtime printing (every minute) and printing top 5 hashes.
+
+Bitcoin_Scraper 0.1.1: User input for haw long the tool will run.
