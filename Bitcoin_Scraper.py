@@ -5,8 +5,13 @@ import pandas as pd
 import regex as re
 import time
 
-# this is for scraping in realtime every 1 minute
-while True:
+# ask user how many minutes the tool must run
+print('Enter how many min you want that the tool will run:')
+number_minutes = input() # asking user for the minutes
+min_input = int(number_minutes) # converting string to int
+counter = 0 # setting the counter
+
+while counter < min_input:
 
     # --- Scraping data ---
     url = "https://www.blockchain.com/btc/unconfirmed-transactions"
@@ -79,4 +84,7 @@ while True:
     print()
 
     # wait 60 seconds for next scraping
-    time.sleep(60)
+    time.sleep(5)
+    
+    # going to next minute for scraper
+    counter = counter + 1
