@@ -1,8 +1,8 @@
 # What is this tool?
-First you will tu fill in haw many munites you want that the tool will run.
-Than it wil scrape every minute 50 hashes and it will sort all the observation (highest bitcoin value above).
-In the terminal you can see the top 5 hashes that were made that time (More info in "What you will get").
-I used BeautifulSoup for scraping the site and pandas and regex to edit the data (More info in "Import files").
+- First you will tu fill in haw many munites you want that the tool will run.
+- Than it wil scrape every minute 50 hashes and it will sort all the observation (highest bitcoin value above).
+- In the terminal you can see the top 5 hashes that were made that time (More info in "What you will get").
+    I used BeautifulSoup for scraping the site and pandas and regex to edit the data (More info in "Import files").
 
 ## Import files
 For running this tool i used these import files:
