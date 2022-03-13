@@ -19,6 +19,7 @@ Scraping import files:
 For making the databese
 - Pandas: Making databeses
 - Regex: To delete and find words
+- Pymongo: Connecting to MongoDB
 ### Helping for scraping
 - Time: realtime scraping
 
