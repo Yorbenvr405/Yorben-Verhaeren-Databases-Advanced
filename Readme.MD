@@ -3,6 +3,7 @@
 - Than it wil scrape every minute 50 hashes and it will sort all the observation (highest bitcoin value above).
 - In the terminal you can see the top 5 hashes that were made that time (More info in "What you will get").
     I used BeautifulSoup for scraping the site and pandas and regex to edit the data (More info in "Import files").
+- The tool will then add those top 5 hashes to a database in MongoDB.
 
 You can find all the sources in the wiki page in Github.
 
@@ -19,6 +20,7 @@ Scraping import files:
 For making the databese
 - Pandas: Making databeses
 - Regex: To delete and find words
+- Pymongo: Connecting to MongoDB
 ### Helping for scraping
 - Time: realtime scraping
 
@@ -31,3 +33,7 @@ Bitcoin_Scraper 0.0: Printing 50 sorted hashes (highest bitcoin value above).
 Bitcoin_Scraper 0.1: Realtime printing (every minute) and printing top 5 hashes.
 
 Bitcoin_Scraper 0.1.1: User input for haw long the tool will run.
+
+Bitcoin_Scraper 1.0: Adding bash file for helping startup server MongoDB.
+
+Bitcoin_Scraper 1.1: Adding data to database in MongoDB.

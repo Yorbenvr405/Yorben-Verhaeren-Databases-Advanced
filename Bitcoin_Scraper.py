@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import regex as re
 import time
+import pymongo as mongo
 
 # ask user how many minutes the tool must run
 print('Enter how many min you want that the tool will run:')
@@ -77,6 +78,17 @@ while counter < min_input:
     # sorting the dataframe on Amount (BTC)
     result_df = result_df.sort_values(by=['Amount (BTC)'], ascending=False, ignore_index=True)
 
+    # connecting to databese
+    client = mongo.MongoClient("mongodb://127.0.0.1:27017")
+    # Make new database
+    my_bit_database = client["Bitcoin_Database"]
+    # converting data to json
+    json_data_bit = result_df[0:5].to_dict("lines")
+    # setting the collumn
+    col_bitcoin = my_bit_database["Bitcoin"]
+    # inserting the data
+    insert_data = col_bitcoin.insert_one(json_data_bit)
+
     # printing the dataframe
     print(result_df[0:5])
 
@@ -84,7 +96,7 @@ while counter < min_input:
     print()
 
     # wait 60 seconds for next scraping
-    time.sleep(5)
+    time.sleep(60)
     
     # going to next minute for scraper
     counter = counter + 1
