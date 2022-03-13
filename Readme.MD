@@ -31,3 +31,5 @@ Bitcoin_Scraper 0.0: Printing 50 sorted hashes (highest bitcoin value above).
 Bitcoin_Scraper 0.1: Realtime printing (every minute) and printing top 5 hashes.
 
 Bitcoin_Scraper 0.1.1: User input for haw long the tool will run.
+
+Bitcoin_Scraper 1.0: Adding bash file for helping startup server MongoDB.
