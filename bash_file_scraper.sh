@@ -5,6 +5,9 @@ clear
 
 # Starting the script
 echo "Starting shell script";
+
+
+
 echo "Ending shell script";
 
 # Printing whats in the bash file
