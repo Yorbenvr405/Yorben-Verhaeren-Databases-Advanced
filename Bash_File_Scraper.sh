@@ -6,7 +6,10 @@ clear
 # Starting the script
 echo "Starting shell script";
 
-
+# Starting MongoDB server
+mongod;
+# Starting the shell
+mongo;
 
 echo "Ending shell script";
 
