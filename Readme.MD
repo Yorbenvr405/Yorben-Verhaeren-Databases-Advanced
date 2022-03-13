@@ -6,6 +6,8 @@
 
 You can find all the sources in the wiki page in Github.
 
+There is also an bash file that you can use to start the MongoDB server.
+
 ## Import files
 For running this tool i used these import files:
 
