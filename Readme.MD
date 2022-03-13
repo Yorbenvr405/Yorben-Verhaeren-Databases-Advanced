@@ -4,6 +4,10 @@
 - In the terminal you can see the top 5 hashes that were made that time (More info in "What you will get").
     I used BeautifulSoup for scraping the site and pandas and regex to edit the data (More info in "Import files").
 
+You can find all the sources in the wiki page in Github.
+
+There is also an bash file that you can use to start the MongoDB server.
+
 ## Import files
 For running this tool i used these import files:
 
