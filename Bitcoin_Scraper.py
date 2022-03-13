@@ -5,7 +5,10 @@ import pandas as pd
 import regex as re
 import time
 import pymongo as mongo
-client = mongo.MongoClient (" mongodb ://127.0.0.1:27017 ")
+client = mongo.MongoClient ("mongodb://127.0.0.1:27017")
+
+# Make new DB
+bitcoin_db = client["Bitcoin_Database"]
 
 # ask user how many minutes the tool must run
 print('Enter how many min you want that the tool will run:')
@@ -78,6 +81,18 @@ while counter < min_input:
 
     # sorting the dataframe on Amount (BTC)
     result_df = result_df.sort_values(by=['Amount (BTC)'], ascending=False, ignore_index=True)
+
+
+
+
+
+    test = result_df[0:5].to_json(orient='index')
+    print(test)
+
+
+
+
+
 
     # printing the dataframe
     print(result_df[0:5])
