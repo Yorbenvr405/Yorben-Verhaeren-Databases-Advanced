@@ -4,6 +4,8 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import regex as re
 import time
+import pymongo as mongo
+client = mongo.MongoClient (" mongodb ://127.0.0.1:27017 ")
 
 # ask user how many minutes the tool must run
 print('Enter how many min you want that the tool will run:')
