@@ -1,10 +1,16 @@
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------- #
 # ---- importing imports ----
+
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import regex as re
 import time
 import pymongo as mongo
+
+
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------- #
+# ---- making the dataframe ----
 
 # ask user how many minutes the tool must run
 print('Enter how many min you want that the tool will run:')
@@ -59,8 +65,6 @@ while counter < min_input:
     hash_bit = [] # making a list to put in an other list for the dataframe
 
     for i in range(0, 50):
-        #print(hashes_list[i] + " " + time_list[i] + " " + BTC_list[i] + " " + USD_list[i])
-
         hash_bit_temp = [] # Ramaking the list and adding the values
 
         hash_bit_temp.append(hashes_list[i])
@@ -78,7 +82,10 @@ while counter < min_input:
     # sorting the dataframe on Amount (BTC)
     result_df = result_df.sort_values(by=['Amount (BTC)'], ascending=False, ignore_index=True)
 
-    # connecting to databese
+
+    # --------------------------------------------------------------------------------------------------------------------------------------------------------------- #
+    # ---- connecting to databese ----
+    
     client = mongo.MongoClient("mongodb://127.0.0.1:27017")
     # Make new database
     my_bit_database = client["Bitcoin_Database"]
@@ -100,3 +107,5 @@ while counter < min_input:
     
     # going to next minute for scraper
     counter = counter + 1
+
+    # --------------------------------------------------------------------------------------------------------------------------------------------------------------- #
