@@ -19,7 +19,7 @@ import zlib
 # ask user how many minutes the tool must run
 print('Enter how many min you want that the tool will run:')
 #number_minutes = input() # asking user for the minutes
-number_minutes = 5
+number_minutes = 2
 min_input = int(number_minutes) # converting string to int
 counter = 0 # setting the counter
 
@@ -94,66 +94,42 @@ while counter < min_input:
 
     data_json = result_df[0:5].to_json()
 
-    EXPIRATION_SECONDS = 600
-
     r = redis.StrictRedis(host='localhost', port=6380, db=0)
 
-    # Set
-    r.setex("key", EXPIRATION_SECONDS, zlib.compress( pickle.dumps(data_json)))
-
-    # Get
-    rehydrated_df = pickle.loads(zlib.decompress(r.get("key")))
+    if counter == 0:
+        r.delete("data")
+        r.append("data", data_json)
+        rehydrated_df = r.get("data")
+    else:
+        r.append("data", data_json)
+        rehydrated_df = r.get("data")
 
     print(rehydrated_df)
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     # --------------------------------------------------------------------------------------------------------------------------------------------------------------- #
-    # ---- connecting to databese ----
-    
-    """ client = mongo.MongoClient("mongodb://127.0.0.1:27017")
-    # Make new database
-    my_bit_database = client["Bitcoin_Database"]
-    # converting data to json
-    json_data_bit = result_df[0:5].to_dict("lines")
-    # setting the collumn
-    col_bitcoin = my_bit_database["Bitcoin"]
-    # inserting the data
-    insert_data = col_bitcoin.insert_one(json_data_bit)
-
-    # printing the dataframe
-    print(result_df[0:5])
-
-    # add a enter for next scraping
-    print() """
 
     # wait 60 seconds for next scraping
-    time.sleep(5)
+    time.sleep(2)
     
     # going to next minute for scraper
     counter = counter + 1
 
     # --------------------------------------------------------------------------------------------------------------------------------------------------------------- #
+
+# ---- connecting to databese ----
+    
+client = mongo.MongoClient("mongodb://127.0.0.1:27017")
+# Make new database
+my_bit_database = client["Bitcoin_Database"]
+# converting data to json
+json_data_bit = result_df[0:5].to_dict("lines")
+# setting the collumn
+col_bitcoin = my_bit_database["Bitcoin"]
+# inserting the data
+insert_data = col_bitcoin.insert_one(json_data_bit)
+
+# printing the dataframe
+print(result_df[0:5])
+
+# add a enter for next scraping
+print()
