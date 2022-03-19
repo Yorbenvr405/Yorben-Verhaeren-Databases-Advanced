@@ -1,13 +1,19 @@
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------- #
 # ---- importing imports ----
+
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import regex as re
 import time
 import pymongo as mongo
+import redis
+import ast
 
-# ask user how many minutes the tool must run
-print('Enter how many min you want that the tool will run:')
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------- #
+# ---- making the dataframe ----
+
+print('Enter how many min you want that the tool will run:') # ask user how many minutes the tool must run
 number_minutes = input() # asking user for the minutes
 min_input = int(number_minutes) # converting string to int
 counter = 0 # setting the counter
@@ -59,8 +65,6 @@ while counter < min_input:
     hash_bit = [] # making a list to put in an other list for the dataframe
 
     for i in range(0, 50):
-        #print(hashes_list[i] + " " + time_list[i] + " " + BTC_list[i] + " " + USD_list[i])
-
         hash_bit_temp = [] # Ramaking the list and adding the values
 
         hash_bit_temp.append(hashes_list[i])
@@ -70,33 +74,50 @@ while counter < min_input:
 
         hash_bit.append(hash_bit_temp) # adding the list to the other list
 
-    # making the dataframe
-    result_df = pd.DataFrame (hash_bit, columns = ['Hash', 'Time', 'Amount (BTC)', 'Amount (USD)'])
-    # setting the types of ech collumn
-    result_df = result_df.astype({'Hash': str, 'Time': str, 'Amount (BTC)': float, 'Amount (USD)': str})
+    result_df = pd.DataFrame (hash_bit, columns = ['Hash', 'Time', 'Amount (BTC)', 'Amount (USD)']) # making the dataframe
+    result_df = result_df.astype({'Hash': str, 'Time': str, 'Amount (BTC)': float, 'Amount (USD)': str}) # setting the types of ech collumn
 
-    # sorting the dataframe on Amount (BTC)
-    result_df = result_df.sort_values(by=['Amount (BTC)'], ascending=False, ignore_index=True)
+    result_df = result_df.sort_values(by=['Amount (BTC)'], ascending=False, ignore_index=True) # sorting the dataframe on Amount (BTC)
 
-    # connecting to databese
-    client = mongo.MongoClient("mongodb://127.0.0.1:27017")
-    # Make new database
-    my_bit_database = client["Bitcoin_Database"]
-    # converting data to json
-    json_data_bit = result_df[0:5].to_dict("lines")
-    # setting the collumn
-    col_bitcoin = my_bit_database["Bitcoin"]
-    # inserting the data
-    insert_data = col_bitcoin.insert_one(json_data_bit)
 
-    # printing the dataframe
-    print(result_df[0:5])
+    # ----------------------------------------------------------------------------------------------------------------------------------------------------------- #
+    # Adding data to Redis
 
-    # add a enter for next scraping
-    print()
+    data_json = result_df[0:5].to_json() # converting data to json
 
-    # wait 60 seconds for next scraping
-    time.sleep(60)
+    r = redis.StrictRedis(host='localhost', port=6380, db=0) # connecting to Redis server
+
+    if counter == 0:
+        r.delete("data") # if there is still data in the cache: remove it
+        r.lpush("data", data_json) # adding new data to server
+
+    else:
+        r.lpush("data", data_json) # adding new data to server
     
-    # going to next minute for scraper
-    counter = counter + 1
+    # ----------------------------------------------------------------------------------------------------------------------------------------------------------- #
+    # Preparing for next loop
+
+    time.sleep(60) # wait 60 seconds for next scraping
+    
+    counter = counter + 1  # going to next minute for scraper
+
+    print("Loop: " + str(counter)) # Logging that there has been looped a loop
+
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------- #
+# Getting data from Redis server
+
+rehydrated_df = r.lrange("data", 0, min_input) # Getting all data from Redis server
+
+for i in range(0, min_input): # converting byte to dict
+    dict_str = rehydrated_df[i].decode("UTF-8") # decoding byte
+    mydata = ast.literal_eval(dict_str) # setting the dict
+
+    rehydrated_df[i] = mydata # replacing the byte with the dict
+
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------- #
+# ---- connecting to databese ----
+    
+client = mongo.MongoClient("mongodb://127.0.0.1:27017") # connecting to MongoDB server
+my_bit_database = client["Bitcoin_Database"] # Make new database
+col_bitcoin = my_bit_database["Bitcoin"] # setting the collumn
+insert_data = col_bitcoin.insert_many(rehydrated_df) # inserting the data
