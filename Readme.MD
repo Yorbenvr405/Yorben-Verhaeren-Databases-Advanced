@@ -8,8 +8,8 @@
 You can find all the sources in the wiki page in Github.
 
 There is also an bash file that you can use to start the MongoDB server and the Redis server.
-- Bash_File_Scraper.sh: Startup MongoDB server
-- Bash_File_Scraper2.sh: Startup Redis server
+- Bash_File_Scraper_0.sh: Startup MongoDB server
+- Bash_File_Scraper_1.sh: Startup Redis server
 
 ## Import files
 For running this tool i used these import files:
