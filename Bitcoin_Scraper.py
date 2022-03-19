@@ -7,11 +7,14 @@ import pandas as pd
 import regex as re
 import time
 import pymongo as mongo
+import json
 
 import pyarrow as pa
 import redis
 import pickle
 import zlib
+from redis.commands.json.path import Path
+import ast
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------- #
 # ---- making the dataframe ----
@@ -90,21 +93,23 @@ while counter < min_input:
 
     # --------------------------------------------------------------------------------------------------------------------------------------------------------------- #
     
-
-
     data_json = result_df[0:5].to_json()
 
     r = redis.StrictRedis(host='localhost', port=6380, db=0)
 
     if counter == 0:
         r.delete("data")
-        r.append("data", data_json)
-        rehydrated_df = r.get("data")
+        #r.append("data", data_json)
+        r.lpush("data", data_json)
+        #rehydrated_df = r.get("data"[0:2])
+        rehydrated_df = r.lrange("data", 0, number_minutes)
     else:
-        r.append("data", data_json)
-        rehydrated_df = r.get("data")
+        #r.append("data", data_json)
+        r.lpush("data", data_json)
+        #rehydrated_df = r.get("data"[0:2])
+        rehydrated_df = r.lrange("data", 0, number_minutes)
 
-    print(rehydrated_df)
+    #print(rehydrated_df)
     
     # --------------------------------------------------------------------------------------------------------------------------------------------------------------- #
 
@@ -116,20 +121,39 @@ while counter < min_input:
 
     # --------------------------------------------------------------------------------------------------------------------------------------------------------------- #
 
+
+
+temp_dict = {}
+
+for i in range(0, number_minutes):
+    dict_str = rehydrated_df[i].decode("UTF-8")
+    mydata = ast.literal_eval(dict_str)
+
+
+dict_str = rehydrated_df[0].decode("UTF-8")
+mydata = ast.literal_eval(dict_str)
+print(repr(mydata))
+
+
+
+
+
+
+
+
+
 # ---- connecting to databese ----
     
 client = mongo.MongoClient("mongodb://127.0.0.1:27017")
 # Make new database
 my_bit_database = client["Bitcoin_Database"]
-# converting data to json
-json_data_bit = result_df[0:5].to_dict("lines")
 # setting the collumn
 col_bitcoin = my_bit_database["Bitcoin"]
 # inserting the data
-insert_data = col_bitcoin.insert_one(json_data_bit)
+insert_data = col_bitcoin.insert_one(mydata)
 
 # printing the dataframe
-print(result_df[0:5])
+#print(result_df[0:5])
 
 # add a enter for next scraping
 print()
