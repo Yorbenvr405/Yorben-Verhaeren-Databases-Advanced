@@ -73,3 +73,5 @@ Bitcoin_Scraper 1.1: Adding data to database in MongoDB.
 Bitcoin_Scraper 2.0: Cache data to Redis server and then to MongoDB server.
 
 Bitcoin_Scraper 3.0: Adding txt file explaining what I did in Docker.
+
+Bitcoin_Scraper 4.0: Editing commands and logging in terminal.
