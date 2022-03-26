@@ -4,8 +4,8 @@ What things are finished in my docker?
     - I made a container for redis. I used this command in Windows CMD terminal: docker run --name some-redis -d redis.
     - In this container I can run the command: redis-server --port 6380 to start up the redis server.
     - After that I searched for how to implement Docker in my scraper. I got stuck with the ports and other things.
-    But I found handy websites online that helped me for understanding what I was doing wrong.
-    You can find all the websites that I found in this documents here under or in this github page under wiki.
+    But there are handy websites online that helped me.
+    You can find all the websites in this documents here under or in this github page under wiki.
 
 Why is it handy to have a docker container?
     - Docker is a container based program and its lets you isolate software components into independent environments with their own filesystem.
