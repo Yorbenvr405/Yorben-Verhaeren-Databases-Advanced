@@ -1,8 +1,17 @@
-In this text file you will see an Q&A about how that I try to use Docker.
+In this text file you will see an Q&A about how that I tried to use Docker.
 
-What things are finnished in docker?
+What things are finnished in my docker?
+    - I made a container for redis. I used this command in Windows CMD terminal: docker run --name some-redis -d redis.
+    - In this container I can run the command: redis-server --port 6380 to start up the redis server.
+    - After that I searched for how to implemend Docker in my scraper. I got stuck with the ports and other things.
+    But I found handy websites online that helped me a little for understanding what I was doing wrong.
+    You can find all the websites that I found in this documents here under or in this github page under wiki.
 
-    - I made a container for redis. I used this command in Windows CMD terminal: docker run --name some-redis -d redis
-    - In this container I can run the command: redis-server --port 6380 to start up the redis server
+Why is it handy to have a docker container?
+    - Docker is a container based programm and its lets you isolate softwere components into independent enviroments with their own filesystem.
+    - It is lighter vitual machine with linux for your pc or compouter to run.
 
-Why is it handy to hova a docker container?
+Source files:
+    - https://www.ibm.com/cloud/learn/docker
+    - https://phoenixnap.com/kb/docker-redis
+    - https://hub.docker.com/_/redis
