@@ -1,3 +1,21 @@
+# Welkom to this page!
+Here you can find my project for Bitcoin Scraper.
+First I going to explain what you can see on this Github page and then I will explain how that you can use this scraper.
+
+## Github
+What in this Github page?
+
+### Code
+Here you can find the code that I wrote.
+### Projects
+Here you can find a to do list.
+You can see step by step what I did in this tool
+### Wiki
+Here you can find all the sources that helped me in making this tool.
+- On page 1 you can find how that I got started with the tools.
+- On page 2 I wrote the frequently used commands.
+
+
 # What is this tool?
 - First you have to fill in haw many munites you want that the tool will run.
 - Than it wil scrape every minute 50 hashes and it will sort all the observation (highest bitcoin value above).
