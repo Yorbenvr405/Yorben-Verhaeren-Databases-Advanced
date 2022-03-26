@@ -5,12 +5,14 @@ First I going to explain what you can see on this Github page and then I will ex
 ## Github
 What in this Github page?
 
-**Code**
+__**Code**__
 Here you can find the code that I wrote.
+
 **Projects**
 Here you can find a to do list.
-You can see step by step what I did in this tool
-**Wiki**
+You can see step by step what I did in this tool.
+
+__**Wiki**__
 Here you can find all the sources that helped me in making this tool.
 - On page 1 you can find how that I got started with the tools.
 - On page 2 I wrote the frequently used commands.
